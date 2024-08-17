@@ -10054,10 +10054,10 @@ function fakeDeepMerge(agg, cur, k, def) {
   if (!cur[k])
     return;
   agg[k] ??= def;
-  agg[k] = [
+  agg[k] = Array.isArray(agg[k]) ? [
     ...agg[k],
     ...cur[k]
-  ];
+  ] : { ...agg[k], ...cur[k] };
   delete cur[k];
 }
 var createParser = (plugins) => {
